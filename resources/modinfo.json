@@ -1,0 +1,13 @@
+{
+  "type": "code",
+  "name": "GlowingArrows",
+  "modid": "glowingarrows",
+  "version": "1.0.0",
+  "description": "Client side glowing arrows",
+  "website": "https://github.com/BillyGalbreath/VS-GlowingArrows",
+  "authors": [ "BillyGalbreath" ],
+  "side": "Client",
+  "dependency": {
+    "game": "1.18.8"
+  }
+}
