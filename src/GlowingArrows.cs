@@ -1,6 +1,7 @@
 ﻿using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
+using Vintagestory.GameContent;
 
 namespace GlowingArrows;
 
@@ -24,8 +25,14 @@ public class GlowingArrows : ModSystem {
     }
 
     private static void GlowThoseArrows(Entity entity) {
-        if (entity.GetType().ToString().ToLower().Contains("projectile")) {
+        if (IsProjectile(entity)) {
             entity.Properties.Client.GlowLevel = 255;
         }
+    }
+
+    private static bool IsProjectile(RegistryObject entity) {
+        return entity is EntityProjectile ||
+               entity.Class.ToLower().Contains("projectile") ||
+               entity.GetType().ToString().ToLower().Contains("projectile");
     }
 }
