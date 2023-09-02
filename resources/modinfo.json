@@ -2,7 +2,7 @@
   "type": "code",
   "name": "GlowingArrows",
   "modid": "glowingarrows",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Client side glowing arrows",
   "website": "https://github.com/BillyGalbreath/VS-GlowingArrows",
   "authors": [ "BillyGalbreath" ],
