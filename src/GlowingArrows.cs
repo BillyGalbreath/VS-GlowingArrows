@@ -18,7 +18,9 @@ public class GlowingArrows : ModSystem {
     }
 
     public override void Dispose() {
-        api.Event.OnEntitySpawn -= GlowThoseArrows;
+        if (api != null) {
+            api.Event.OnEntitySpawn -= GlowThoseArrows;
+        }
     }
 
     private static void GlowThoseArrows(Entity entity) {
