@@ -7,7 +7,7 @@
   "website": "https://github.com/BillyGalbreath/VS-GlowingArrows",
   "authors": [ "BillyGalbreath" ],
   "side": "Client",
-  "dependency": {
+  "dependencies": {
     "game": "1.18.8"
   }
 }
