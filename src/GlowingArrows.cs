@@ -16,14 +16,23 @@ public class GlowingArrows : ModSystem {
 
     public override void StartClientSide(ICoreClientAPI api) {
         api.Event.RegisterCallback(_ => {
-            Dictionary<string, Type>? mapping = ((ClassRegistryAPI)api.ClassRegistry).GetField<ClassRegistry>("registry")?.entityClassNameToTypeMapping;
-            foreach (EntityProperties entityProperties in api.World.EntityTypes.Where(properties =>
-                         (mapping != null && mapping[properties.Class].IsAssignableFrom(typeof(EntityProjectile)))
-                         || properties.Class.ToLower().Contains("projectile")
-                         || (properties.Code.ToString()?.ToLower().Contains("projectile") ?? false)
-                     )) {
-                entityProperties.Client.GlowLevel = 0xFF;
+            Dictionary<string, Type?>? mapping = ((ClassRegistryAPI)api.ClassRegistry).GetField<ClassRegistry>("registry")?.entityClassNameToTypeMapping;
+            foreach (EntityProperties properties in api.World.EntityTypes.Where(properties => IsProjectile(mapping, properties))) {
+                properties.Client.GlowLevel = 0xFF;
             }
         }, 1000);
+    }
+
+    private static bool IsProjectile(IReadOnlyDictionary<string, Type?>? mapping, EntityProperties properties) {
+        if ((mapping?.TryGetValue(properties.Class, out Type? type) ?? false) &&
+            (type?.IsAssignableFrom(typeof(EntityProjectile)) ?? false)) {
+            return true;
+        }
+
+        if (properties.Class.ToLower().Contains("projectile")) {
+            return true;
+        }
+
+        return properties.Code?.ToString().ToLower().Contains("projectile") ?? false;
     }
 }
